@@ -8,9 +8,9 @@ A technical case study of a persistent, reinfecting WordPress compromise across 
 
 One incident, three standalone writeups:
 
-1. **[The war story](./analysis/01-ir-war-story.md)** — defender's account: the three-homes payload, the shell zoo, the kill-switch, and cleaning it blind over FTP. *Available now.*
-2. **The threat-actor campaign profile** — infrastructure, TTPs, MITRE ATT&CK, victimology. *Coming next.*
-3. **The reproduction lab** — rebuild it safely in Docker. *Coming after.*
+1. **[The war story](./analysis/01-ir-war-story.md)**. Defender's account: the three-homes payload, the shell zoo, the kill-switch, and cleaning it blind over FTP. *Available now.*
+2. **[The threat-actor campaign profile](./analysis/02-actor-campaign.md)**. Infrastructure, reverse-engineering the PHP implants, fingerprints, TTPs, MITRE ATT&CK, victimology. *Available now.*
+3. **The reproduction lab**. Rebuild it safely in Docker. *Coming after.*
 
 ## Indicators
 

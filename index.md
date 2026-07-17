@@ -19,11 +19,11 @@ flowchart LR
 
 This one incident is written up as three standalone pieces. Each answers a different question and does not repeat the others.
 
-**1. [The war story: a compromise that would not die](./analysis/01-ir-war-story.md)** — *the defender's account.* How the payload hid in three places, why single-pass cleanup failed, the shell zoo, the sabotage kill-switch, and how it was all cleaned blind over FTP with no shell. **Available now.**
+**1. [The war story: a compromise that would not die](./analysis/01-ir-war-story.md)**. *The defender's account.* How the payload hid in three places, why single-pass cleanup failed, the shell zoo, the sabotage kill-switch, and how it was all cleaned blind over FTP with no shell. **Available now.**
 
-**2. The threat-actor campaign profile** — *the intel view.* Infrastructure map, shell-family fingerprints, rogue-admin tradecraft, MITRE ATT&CK, and victimology across the VPS. *Coming next.*
+**2. [The threat-actor campaign profile](./analysis/02-actor-campaign.md)**. *The intel view.* Infrastructure map, shell-family fingerprints, reverse-engineering the PHP implants, rogue-admin tradecraft, MITRE ATT&CK, and victimology across the VPS. *Available now.*
 
-**3. The reproduction lab** — *hands-on.* Rebuild the compromise safely in an isolated Docker stack. *Coming after.*
+**3. The reproduction lab**. *Hands-on.* Rebuild the compromise safely in an isolated Docker stack. *Coming after.*
 
 ## Indicators
 
