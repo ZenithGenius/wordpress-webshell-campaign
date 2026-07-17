@@ -19,7 +19,7 @@ plugins:
 # of the published site.
 exclude:
   - docs/
-  - wp-persist-lab/wordpress_data/
+  - wp-persist-lab/
   - .playwright-mcp/
   - _site/
   - .jekyll-cache/

@@ -1,0 +1,66 @@
+# WordPress persistent-compromise reproduction lab.
+# Everything is benign: the "shells" are neutered stand-ins and the injected
+# redirect / stager point only at the local sink. Bound to 127.0.0.1.
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wp
+      MARIADB_PASSWORD: wp
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+    networks: [labnet]
+
+  wordpress:
+    image: wordpress:6.4-php8.2-apache
+    depends_on: [db]
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wordpress
+    ports:
+      - "127.0.0.1:${WP_PORT:-8018}:80"
+    volumes:
+      - wp_data:/var/www/html
+    networks: [labnet]
+
+  # Runs the one-time WP install, then stays up so trigger.sh / reset.sh can
+  # exec wp-cli and file operations against the shared web root.
+  wpcli:
+    image: wordpress:cli-php8.2
+    depends_on: [db, wordpress]
+    user: "0:0"
+    environment:
+      # wp-config.php resolves these via getenv_docker at runtime in THIS container,
+      # so wp-cli needs the same DB settings as the wordpress service.
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wordpress
+      WP_PORT: ${WP_PORT:-8018}
+    entrypoint: ["sh", "/setup/wp-setup.sh"]
+    volumes:
+      - wp_data:/var/www/html
+      - ./setup:/setup:ro
+      - ./seed:/seed:ro
+    networks: [labnet]
+
+  # Local stand-in for the campaign's shortener + C2 infrastructure. Serves only
+  # inert text. Aliased so the injected redirect / stager resolve on-network.
+  sink:
+    build: ./sink
+    ports:
+      - "127.0.0.1:${SINK_PORT:-8019}:8080"
+    networks:
+      labnet:
+        aliases: [c2.lab, ushort.lab]
+
+networks:
+  labnet:
+
+volumes:
+  wp_data:
+  db_data:

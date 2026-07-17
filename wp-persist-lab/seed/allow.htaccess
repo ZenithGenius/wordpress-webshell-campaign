@@ -1,0 +1,14 @@
+# Allowlist concealment, same shape as the campaign: deny every executable
+# extension, then allow only the (neutered) lab stand-in shells. Lab use only.
+<FilesMatch "\.(php|phtml|php3|php5|php7|pht)$">
+    Require all denied
+</FilesMatch>
+<Files "wp-lab-shell.php">
+    Require all allowed
+</Files>
+<Files "wp-lab-boot.php">
+    Require all allowed
+</Files>
+<Files "wp-lab-stager.php">
+    Require all allowed
+</Files>

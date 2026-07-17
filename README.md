@@ -10,7 +10,7 @@ One incident, three standalone writeups:
 
 1. **[The war story](./analysis/01-ir-war-story.md)**. Defender's account: the three-homes payload, the shell zoo, the kill-switch, and cleaning it blind over FTP. *Available now.*
 2. **[The threat-actor campaign profile](./analysis/02-actor-campaign.md)**. Infrastructure, reverse-engineering the PHP implants, fingerprints, TTPs, MITRE ATT&CK, victimology. *Available now.*
-3. **The reproduction lab**. Rebuild it safely in Docker. *Coming after.*
+3. **[The reproduction lab](./wp-persist-lab/)**. Rebuild it safely in Docker: redirect in three homes, read-only JS, neutered shells, local sink for the shortener and C2. *Available now.*
 
 ## Indicators
 
