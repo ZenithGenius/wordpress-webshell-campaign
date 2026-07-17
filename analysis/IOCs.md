@@ -48,6 +48,9 @@ SEO / shortener redirect:
 Mobile popunder:
   olame[.]live                       (~10 numbered paths, e.g. /AEA0c10 .. /FFm9c69)
 
+Additional landing:
+  muslmh[.]x-b[.]biz                 (observed alongside the shorteners)
+
 Remote stager / C2:
   hxxps://github.eshree[.]top/fkolpsfd/olpfkchwa.txt     eval(base64) second stage
   hxxps://vpsdd.fnftus[.]top/test/gg.txt                 loader payload

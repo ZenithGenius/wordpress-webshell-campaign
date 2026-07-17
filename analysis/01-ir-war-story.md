@@ -179,7 +179,7 @@ $ curl -s https://<site>/ | grep -iE 'ushort|urshort|olame'
     (no output - looks clean)
 
 Browser: loads /, executes theme + wp-includes .js, redirects to
-         hxxp://urshort[.]com/JpfSmvKbW0r6...   (still poisoned)
+         hxxp://urshort[.]com/<token>/...       (still poisoned)
 ```
 
 The redirect was living in the JavaScript layer and in database-rendered page bodies, not in the initial HTML. `curl` fetches HTML and stops; it never runs the `.js`, so it never sees the redirect. Two rules came out of this:

@@ -25,6 +25,16 @@ This one incident is written up as three standalone pieces. Each answers a diffe
 
 **3. [The reproduction lab](https://github.com/ZenithGenius/wordpress-webshell-campaign/tree/main/wp-persist-lab)**. *Hands-on.* Rebuild the compromise safely in an isolated Docker stack: the redirect in three homes, read-only JavaScript, neutered shells, and a local sink standing in for the shortener and C2. Detonate, detect, clean. *Available now.*
 
+## Deep dives
+
+Focused technical companions to the series.
+
+**[Deobfuscating the toolkit](./analysis/03-deobfuscation.md).** *Reversing.* A static, sample-by-sample walkthrough of the real implants: the WSO five-stage decode, character-arithmetic function names, comment-noise wrapping, the remote stager, and the goto-flattened sabotage.
+
+**[Tracing the operator](./analysis/04-tracing.md).** *Attribution.* Clustering the infrastructure and tradecraft into one operator, with reused handles, builder-kit fingerprints, a timeline, and an honest account of what cannot be proven.
+
+**[Cleaning without a shell](./analysis/05-ftp-ir-tooling.md).** *Methodology.* The FTP-only IR toolkit behind the war story: token-locked throwaway tools, mtime cutover scanning, read-only JavaScript, and safe database cleanup.
+
 ## Indicators
 
 [Indicators of compromise and YARA rules](./analysis/IOCs.md), defanged, for detection and threat intelligence.
