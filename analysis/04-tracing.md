@@ -72,7 +72,7 @@ flowchart TB
     ACT --> K["Builder-kit obfuscation<br/>char-arithmetic names, XOR 'wsoyanz'"]
     ACT --> N["Naming + concealment<br/>random .php + allowlist .htaccess"]
     ACT --> A["Account habits<br/>1970 timestamps, camouflage plugins"]
-    H --> CL{{"Same operator across tenants"}}
+    H --> CL(["Same operator across tenants"])
     K --> CL
     N --> CL
     A --> CL
