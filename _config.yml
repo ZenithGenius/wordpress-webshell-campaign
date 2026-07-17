@@ -1,0 +1,28 @@
+title: "WordPress Webshell Campaign"
+description: "A persistent, reinfecting multi-site WordPress compromise: defender war-story, threat-actor profile, and a reproducible lab."
+lang: en
+
+# Render every markdown page through the Mermaid-enabled layout.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# GitHub Pages enables jekyll-relative-links + jekyll-optional-front-matter by
+# default, so .md cross-links resolve to .html and front-matter-less files build.
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+
+# Keep private planning notes, the anonymization map, and lab runtime state OUT
+# of the published site.
+exclude:
+  - docs/
+  - wp-persist-lab/wordpress_data/
+  - .playwright-mcp/
+  - _site/
+  - .jekyll-cache/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
