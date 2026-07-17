@@ -92,5 +92,9 @@ docker-compose.yml   wordpress + mariadb + wp-cli installer + sink, on one 127.0
 setup/wp-setup.sh    one-time WordPress install, then idle for exec
 sink/                local, inert stand-in for the shortener + C2 infrastructure
 seed/                neutered shells, allowlist artifact, redirect snippets
-trigger.sh reset.sh  detonate / clean
+vuln-plugin/         deliberately vulnerable must-use plugin (lab-only upload vector)
+exploit.sh           module 1: initial access via unauthenticated upload (CVE class)
+trigger.sh           module 2: persistence + redirect in three homes
+lotl.sh              module 3: living-off-the-land database poisoning
+reset.sh             undo all three
 ```
