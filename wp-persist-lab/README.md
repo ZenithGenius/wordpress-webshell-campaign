@@ -8,7 +8,20 @@ This lab teaches detection and cleanup. It is not a webshell kit.
 
 - The "shells" (`wp-lab-shell.php`, `wp-lab-boot.php`, `wp-lab-stager.php`) are **neutered stand-ins**. They carry the family signature strings so YARA and string hunts fire, but every capability is removed: no file access, no command execution, no decode chain, no `eval`.
 - The injected redirect and the stager point only at a **local sink** container that serves inert text. Nothing ever contacts the real shortener or C2 infrastructure.
+- The vulnerable plugin (`vuln-plugin/lab-vuln-upload.php`) is a deliberately-insecure must-use plugin that exists **only inside the lab**, so the initial-access module has a real vector. It is never something you deploy.
 - Everything binds to `127.0.0.1`. Nothing malicious leaves the host.
+
+## The three attack modules
+
+The lab runs the intrusion in the same order a real one does. Each is a separate, practical exercise.
+
+**1. `exploit.sh` — initial access (CVE class).** Models an unauthenticated arbitrary file upload, the class behind CVE-2020-25213 (wp-file-manager) and many other WordPress plugin bugs. It uploads the neutered shell with no login and no nonce, then requests it back to prove the shell is live. This is the "how did the shell get there" step that the incident reports could never fully pin down.
+
+**2. `trigger.sh` — persistence and redirect.** Plants the redirect in all three homes (a `.php`, a read-only `444` `.js`, and the database) and drops the shell set plus the allowlist concealment artifact. This is the post-access stage from the war story.
+
+**3. `lotl.sh` — living off the land.** Uses the site's own legitimate tooling (`wp-cli`) to inject the redirect into every published post. No malware file is written, so a file scan or YARA sweep finds nothing. The only evidence is in the database rows, which is exactly why the campaign's database poisoning survived file-only cleanups. This mirrors the real actor's abuse of a trusted Search-Replace-DB tool.
+
+`reset.sh` undoes all three: removes the shells (including the exploit-dropped one), restores the read-only `.js`, and strips both the trigger and living-off-the-land database injections.
 
 ## Requirements
 
@@ -22,10 +35,16 @@ docker compose up -d --build     # start: wordpress, db, wp-cli (auto-installs),
 # wait until the installer reports ready:
 docker compose logs -f wpcli     # look for "WordPress ready", then Ctrl-C
 
-./trigger.sh                     # detonate: plant the redirect in all three homes + drop shells
-./reset.sh                       # clean it all up
+# the full chain, in the order a real intrusion runs:
+./exploit.sh                     # 1. initial access: unauthenticated upload drops a shell (CVE class)
+./trigger.sh                     # 2. persistence + redirect in three homes
+./lotl.sh                        # 3. living off the land: poison the database with the site's own tools
+
+./reset.sh                       # clean all of it up
 docker compose down -v           # tear the lab down
 ```
+
+Run the modules together or on their own. Each is idempotent, and `reset.sh` undoes all three.
 
 WordPress: `http://localhost:8018` (admin / labadmin). Sink: `http://localhost:8019`. Change ports in `.env` if they collide.
 

@@ -25,6 +25,9 @@ services:
       - "127.0.0.1:${WP_PORT:-8018}:80"
     volumes:
       - wp_data:/var/www/html
+      # LAB ONLY: deliberately vulnerable must-use plugin (unauth upload) so the
+      # initial-access module (exploit.sh) has a real vector. Isolated, 127.0.0.1.
+      - ./vuln-plugin:/var/www/html/wp-content/mu-plugins:ro
     networks: [labnet]
 
   # Runs the one-time WP install, then stays up so trigger.sh / reset.sh can

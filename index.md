@@ -23,7 +23,7 @@ This one incident is written up as three standalone pieces. Each answers a diffe
 
 **2. [The threat-actor campaign profile](./analysis/02-actor-campaign.md)**. *The intel view.* Infrastructure map, shell-family fingerprints, reverse-engineering the PHP implants, rogue-admin tradecraft, MITRE ATT&CK, and victimology across the VPS. *Available now.*
 
-**3. [The reproduction lab](https://github.com/ZenithGenius/wordpress-webshell-campaign/tree/main/wp-persist-lab)**. *Hands-on.* Rebuild the compromise safely in an isolated Docker stack: the redirect in three homes, read-only JavaScript, neutered shells, and a local sink standing in for the shortener and C2. Detonate, detect, clean. *Available now.*
+**3. [The reproduction lab](https://github.com/ZenithGenius/wordpress-webshell-campaign/tree/main/wp-persist-lab)**. *Hands-on.* Rebuild the compromise safely in an isolated Docker stack, running the intrusion in the order it really happens: initial access through an unauthenticated upload (CVE class), persistence and the redirect in three homes, and living-off-the-land database poisoning with the site's own tools. Detonate, detect, clean. *Available now.*
 
 ## Deep dives
 

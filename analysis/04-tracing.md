@@ -52,6 +52,16 @@ The injected links did not point at a bare shortener domain. They preserved the 
 
 That is a useful pivot. It means the redirect was generated with knowledge of the site map, consistent with the same server-side access that planted the shells, not a blind bulk find-and-replace of a single string.
 
+## How the redirect paid
+
+All of this access existed to make money, in the least glamorous way there is: reselling stolen traffic. The redirect chain is a monetization funnel.
+
+- **Link shorteners** (`ushort`, `urshort`, `u-short`) pay the operator per redirect or per completed interstitial. Hijacked visitors are just inventory pushed through them.
+- **The popunder** (`olame[.]live`) opens revenue-generating tabs, and its ten numbered paths and mobile targeting are built for the highest-yield, hardest-to-notice audience: phone users who bounce and blame the site.
+- **Mirroring the victim's own paths** under the attacker domain preserved the appearance and any search-engine value of the original URL while swapping the destination, squeezing more from each stolen click.
+
+None of this needs the victim to be a valuable target in its own right. The nonprofit was not chosen, its traffic was simply monetizable, which is why the same funnel appeared on every unrelated tenant on the host. Traffic hijacking is the quieter cousin of cryptojacking: no spike in CPU, no obvious damage, just a slow skim off every visitor until someone notices the redirect.
+
 ## Pivoting on the toolkit
 
 Infrastructure can be rented, shared, or burned. The more durable link between victims is the toolkit itself, because its construction habits repeat.

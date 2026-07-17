@@ -188,6 +188,14 @@ flowchart LR
 
 *The loop is the point. Persistence outlived every file-only cleanup.*
 
+## Living off the land
+
+Not every stage used custom malware, and the stage that did the most damage used none. The database poisoning was carried out with a legitimate tool: a copy of InterconnectIT's Search-Replace-DB was dropped into the web root. That is a real, widely-used administrator utility for find-and-replace across a WordPress database, serialized data included. In the operator's hands it became a mass-injection engine. One pass rewrote the shortener string into thousands of rows, with no bespoke code to write or hide.
+
+The copy on the host also carried the tool's legacy `preg_replace(... /e)` pattern, a known remote-code-execution foot-gun in old PHP, which is a second reason such a tool is dangerous to leave reachable. But the sharper lesson is detection. Living off the land means the destructive step has no malware signature. A file scan sees a known-good utility and a series of ordinary SQL updates. There is nothing for YARA to match.
+
+This is why the database was the layer that kept surviving file-only cleanups. You can run this exact technique, and practice detecting it when there is no malicious file to find, in the [reproduction lab](https://github.com/ZenithGenius/wordpress-webshell-campaign/tree/main/wp-persist-lab)'s living-off-the-land module.
+
 ## MITRE ATT&CK
 
 | Tactic | Technique | In this campaign |
@@ -201,6 +209,7 @@ flowchart LR
 | Command and Control | `T1105` Ingress Tool Transfer | Off-host second stages fetched on demand |
 | Command and Control | `T1071.001` Web Protocols | HTTP(S) C2 and beacon |
 | Impact | `T1491.001` Internal Defacement | Redirect injection into pages and files |
+| Impact | `T1565.001` Stored Data Manipulation | Legitimate Search-Replace-DB tool used to inject at scale |
 | Impact | `T1485` Data Destruction | Sabotage kill-switch overwriting root files |
 
 ## Victimology and attribution limits
