@@ -15,11 +15,11 @@ This lab teaches detection and cleanup. It is not a webshell kit.
 
 The lab runs the intrusion in the same order a real one does. Each is a separate, practical exercise.
 
-**1. `exploit.sh` — initial access (CVE class).** Models an unauthenticated arbitrary file upload, the class behind CVE-2020-25213 (wp-file-manager) and many other WordPress plugin bugs. It uploads the neutered shell with no login and no nonce, then requests it back to prove the shell is live. This is the "how did the shell get there" step that the incident reports could never fully pin down.
+**1. `exploit.sh`: initial access (CVE class).** Models an unauthenticated arbitrary file upload, the class behind CVE-2020-25213 (wp-file-manager) and many other WordPress plugin bugs. It uploads the neutered shell with no login and no nonce, then requests it back to prove the shell is live. This is the "how did the shell get there" step that the incident reports could never fully pin down.
 
-**2. `trigger.sh` — persistence and redirect.** Plants the redirect in all three homes (a `.php`, a read-only `444` `.js`, and the database) and drops the shell set plus the allowlist concealment artifact. This is the post-access stage from the war story.
+**2. `trigger.sh`: persistence and redirect.** Plants the redirect in all three homes (a `.php`, a read-only `444` `.js`, and the database) and drops the shell set plus the allowlist concealment artifact. This is the post-access stage from the war story.
 
-**3. `lotl.sh` — living off the land.** Uses the site's own legitimate tooling (`wp-cli`) to inject the redirect into every published post. No malware file is written, so a file scan or YARA sweep finds nothing. The only evidence is in the database rows, which is exactly why the campaign's database poisoning survived file-only cleanups. This mirrors the real actor's abuse of a trusted Search-Replace-DB tool.
+**3. `lotl.sh`: living off the land.** Uses the site's own legitimate tooling (`wp-cli`) to inject the redirect into every published post. No malware file is written, so a file scan or YARA sweep finds nothing. The only evidence is in the database rows, which is exactly why the campaign's database poisoning survived file-only cleanups. This mirrors the real actor's abuse of a trusted Search-Replace-DB tool.
 
 `reset.sh` undoes all three: removes the shells (including the exploit-dropped one), restores the read-only `.js`, and strips both the trigger and living-off-the-land database injections.
 
