@@ -18,7 +18,7 @@ flowchart TD
     P[One SEO-redirect payload] --> A["Thousands of .php files<br/>2588-byte ob_start block<br/>+ hex window.location"]
     P --> B["Hundreds of .js files<br/>444 read-only<br/>core + theme + plugin"]
     P --> C["WordPress database<br/>home / siteurl, post_content,<br/>SEO tables, static llms.txt"]
-    A --> R((Visitor redirected<br/>hxxp://ushort[.]company))
+    A --> R(("Visitor redirected<br/>to a shortener domain"))
     B --> R
     C --> R
 ```
@@ -34,10 +34,10 @@ This was not one event. It was a cycle. Each cleanup looked complete and each ti
 ```mermaid
 timeline
     title Three waves over four months
-    Wave 1 (March) : Four shells + redirect discovered : Cleaned over FTP, all shells return 403
-    March 29 (re-drop) : Server-side write, no admin UI request : Rogue admins with 1970 timestamps + fake plugin dirs
-    Wave 2 (April) : Wordfence surfaces reinfection : Redirect back via database options + static llms.txt
-    Wave 3 (July) : Resurgence across sibling sites : Multi-vhost .php / .js / database cleanup
+    March, wave 1 : Four shells and redirect discovered : Cleaned over FTP, all shells return 403
+    March 29, re-drop : Server-side write, no admin UI request : Rogue admins with 1970 timestamps and fake plugin dirs
+    April, wave 2 : Wordfence surfaces reinfection : Redirect back via database options and static llms.txt
+    July, wave 3 : Resurgence across sibling sites : Multi-vhost php, js and database cleanup
 ```
 
 *Single-pass cleanup failed three times because persistence outlived the files that were removed.*
@@ -193,7 +193,7 @@ There was no shell and no SSH on this host. Everything was done over FTP against
 
 ```mermaid
 flowchart TB
-    A[No shell: FTP access only] --> B[Upload token-locked PHP tool]
+    A["No shell: FTP access only"] --> B[Upload token-locked PHP tool]
     B --> C[Scan multi-ext for hex marker]
     C --> D{File type}
     D -->|.php writable| E[Truncate at marker]
