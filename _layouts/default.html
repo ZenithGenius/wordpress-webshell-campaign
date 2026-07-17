@@ -93,12 +93,14 @@
     }
     @media (min-width: 1080px) {
       .shell { grid-template-columns: 15rem minmax(0, 1fr); }
+      /* No TOC (e.g. homepage): collapse to a single column, no empty rail. */
+      .shell:has(.toc:empty) { grid-template-columns: minmax(0, 1fr); }
     }
 
     /* ---- table of contents (glass rail) ---- */
     .toc { display: none; }
     @media (min-width: 1080px) {
-      .toc {
+      .toc:not(:empty) {
         display: block; position: sticky; top: 5.4rem; align-self: start;
         font-size: 0.88rem; line-height: 1.5; max-height: calc(100vh - 7rem); overflow-y: auto;
         padding: 1.1rem 1rem; border-radius: 14px;
